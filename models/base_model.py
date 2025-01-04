@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This module defines a base class for all models in our hbnb clone"""
 import models
-import uuid import uuid4
+from uuid import uuid4  # Fixed the syntax error
 from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column
@@ -26,7 +26,7 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                if key != "__class__":
+                if key != "__class__": 
                     setattr(self, key, value)
 
     def __str__(self):
@@ -44,12 +44,6 @@ class BaseModel:
         dict1.pop("_sa_instance_state", None)
         return dict1
 
-     def delete(self):
+    def delete(self):
         """Delete the current instance from storage."""
         models.storage.delete(self)
-
-    def __str__(self):
-        """Returns a string representation of the instance"""
-        dx = self.__dict__.copy()
-        dx.pop("_sa_instance_state", None)
-        return '[{}] ({}) {}'.format(type(self).__name__, self.id, dx)
