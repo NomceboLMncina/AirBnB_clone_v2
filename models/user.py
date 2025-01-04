@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ class User"""
-
+import sys
+sys.path.append('/root/AirBnB_clone_v2/')
 from models.base_model import BaseModel, Base
 from os import getenv
 from sqlalchemy.orm import relationship
