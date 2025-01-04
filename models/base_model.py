@@ -35,16 +35,6 @@ class BaseModel:
         dx.pop("_sa_instance_state", None)
         return '[{}] ({}) {}'.format(type(self).__name__, self.id, dx)
 
-    def delete(self):
-        """Delete the current instance from storage."""
-        models.storage.delete(self)
-
-    def save(self):
-        """Updates updated_at with current time when instance is changed"""
-        self.updated_at = datetime.utcnow()
-        models.storage.new(self)
-        models.storage.save()
-
     def to_dict(self):
         """Convert instance into dict format"""
         dict1 = self.__dict__.copy()
@@ -53,3 +43,13 @@ class BaseModel:
         dict1['updated_at'] = self.updated_at.isoformat()
         dict1.pop("_sa_instance_state", None)
         return dict1
+
+     def delete(self):
+        """Delete the current instance from storage."""
+        models.storage.delete(self)
+
+    def __str__(self):
+        """Returns a string representation of the instance"""
+        dx = self.__dict__.copy()
+        dx.pop("_sa_instance_state", None)
+        return '[{}] ({}) {}'.format(type(self).__name__, self.id, dx)
