@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """This module defines a base class for all models in our hbnb clone"""
+import warnings
+warnings.filterwarnings("ignore", category=RuntimeWarning)
 import models
 from uuid import uuid4  # Fixed the syntax error
 from datetime import datetime
@@ -47,3 +49,9 @@ class BaseModel:
     def delete(self):
         """Delete the current instance from storage."""
         models.storage.delete(self)
+
+if __name__ == "__main__":
+    # Example usage of BaseModel
+    from models.base_model import BaseModel
+    bm = BaseModel()
+    print(bm)
