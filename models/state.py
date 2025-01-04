@@ -17,7 +17,7 @@ class State(BaseModel):
     if getenv('HBNB_TYPE_STORAGE') != 'db':
         @property
         def cities(self):
-            """get a list of all related city instances
+            """list of all related city instances
             with state_id = to the current state id
             """
             cities_list = []
