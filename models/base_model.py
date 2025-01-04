@@ -3,13 +3,13 @@
 import models
 import uuid import uuid4
 from datetime import datetime
-
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column
 from sqlalchemy import DateTime
 from sqlalchemy import String
 
 Base = declarative_base()
+
 
 class BaseModel:
     """A base class for all hbnb models"""
