@@ -17,7 +17,7 @@ class FileStorage:
 
     def all(self, cls=None):
         """Returns the list of objects of one type of class."""
-
+        
         if cls:
             if type(cls) == str:
                 cls = eval(cls)
@@ -26,7 +26,7 @@ class FileStorage:
                 if type(value) == cls:
                     dict1[key] = value
             return dict1 
-        return self.objects
+        return self.__objects
 
     def new(self, obj):
         """Adds a new object to the __objects dictionary."""
