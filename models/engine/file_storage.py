@@ -16,10 +16,17 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """Returns the list of objects of one type of class.""" 
+        """Returns the list of objects of one type of class."""
+
         if cls:
-            return {key: val for key, val in self.__objects.items() if isinstance(val, cls)} 
-        return self
+            if type(cls) == str:
+                cls = eval(cls)
+            dict1 = {}
+            for key, value in self.__objects.items():
+                if type(value) == cls:
+                    dict1[key] = value
+            return dict1 
+        return self.objects
 
     def new(self, obj):
         """Adds a new object to the __objects dictionary."""
