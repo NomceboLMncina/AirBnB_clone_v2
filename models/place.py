@@ -16,7 +16,8 @@ place_amenity = Table("place_amenity", Base.metadata,
                       Column("amenity_id", String(60),
                              ForeignKey("amenities.id"),
                              primary_key=True,
-                             nullable=False))
+                             nullable=False),
+                      __table_args__ = {'extend_existing': True})
 
 
 class Place(BaseModel, Base):
