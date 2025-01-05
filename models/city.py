@@ -15,6 +15,7 @@ class City(BaseModel, Base):
         name: input name
     """
     __tablename__ = "cities"
+    __table_args__ = {'extend_existing': True}
     name = Column(String(128), nullable=False)
     state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
     places = relationship("Place", cascade='all, delete, delete-orphan',
