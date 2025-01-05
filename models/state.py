@@ -11,6 +11,7 @@ from sqlalchemy.orm import relationship
 class State(BaseModel, Base):
     """ state representation """
     __tablename__ = 'states'
+    __table_args__ = {'extend_existing': True}
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':
         __tablename__ = 'states'
