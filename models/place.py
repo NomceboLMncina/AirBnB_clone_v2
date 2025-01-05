@@ -17,7 +17,7 @@ place_amenity = Table("place_amenity", Base.metadata,
                              ForeignKey("amenities.id"),
                              primary_key=True,
                              nullable=False),
-                      __table_args__ = {'extend_existing': True})
+                    extend_existing= True)
 
 
 class Place(BaseModel, Base):
@@ -36,6 +36,7 @@ class Place(BaseModel, Base):
         amenity_ids: list of Amenity ids
     """
     __tablename__ = "places"
+    __table_args__ = {'extend_existing': True}
     city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
     user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
     name = Column(String(128), nullable=False)
