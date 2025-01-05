@@ -5,16 +5,12 @@
    instantiates a database storage engine (DBStorage).
 -> Otherwise, instantiates a file storage engine (FileStorage).
 """
-
-import os
-from models.engine.db_storage import DBStorage
 from models.engine.file_storage import FileStorage
+from models.engine.db_storage import DBStorage
+from os import getenv
 
-storage_t = os.getenv('HBNB_TYPE_STORAGE')
-
-if storage_t == 'db':
+if getenv("HBNB_TYPE_STORAGE") == 'db':
     storage = DBStorage()
-    storage.reload()
 else:
     storage = FileStorage()
-    storage.reload()
+storage.reload()
