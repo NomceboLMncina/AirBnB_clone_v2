@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 """ class User"""
-import sys
-sys.path.append('/root/AirBnB_clone_v2/')
 from models.base_model import BaseModel, Base
-from os import getenv
+import os
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column
 from sqlalchemy import String
@@ -16,14 +14,47 @@ class User(BaseModel, Base):
         email: user email address.
         passwd: user's password.
         f_name: user's first name
-        l_name: user's last name
+        l_name: user's lastname
         places: user-pace relationship
         reviews: user-review"""
-    if getenv('HBNB_TYPE_STORAGE') == 'db':
+
         __tablename__ = "users"
-        email = Column(String(128), nullable=False)
-        passwd = Column(String(128), nullable=False)
-        f_name = Column(String(128), nullable=True)
-        l_name = Column(String(128), nullable=True)
-        places = relationship("Place", backref="user", cascade="delete")
-        reviews = relationship("Review", backref="user", cascade="delete")
+    email = (
+        Column(String(128), nullable=False)
+        if os.getenv("HBNB_TYPE_STORAGE") == "db"
+        else ""
+    )
+
+    password = (
+        Column(String(128), nullable=False)
+        if os.getenv("HBNB_TYPE_STORAGE") == "db"
+        else ""
+    )
+
+    first_name = (
+        Column(String(128), nullable=True)
+        if os.getenv("HBNB_TYPE_STORAGE") == "db"
+        else ""
+    )
+
+    last_name = (
+        Column(String(128), nullable=True)
+        if os.getenv("HBNB_TYPE_STORAGE") == "db"
+        else ""
+    )
+
+    places = (
+        relationship(
+            "Place", cascade="all, delete, delete-orphan", backref="user"
+        )
+        if os.getenv("HBNB_TYPE_STORAGE") == "db"
+        else None
+    )
+
+    reviews = (
+        relationship(
+            "Review", cascade="all, delete, delete-orphan", backref="user"
+        )
+        if os.getenv("HBNB_TYPE_STORAGE") == "db"
+        else None
+    )
